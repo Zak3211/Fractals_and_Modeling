@@ -1,30 +1,60 @@
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
+
+plt.ion()
+plt.rcParams['toolbar'] = 'None'
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection = '3d')
+
+ax.set_xlim(-30, 30) 
+ax.set_ylim(-70, 70)  
+ax.set_zlim(-30, 70) 
+
+ax.set_facecolor('black')
+fig.patch.set_facecolor('black')
+ax.grid(False)
+ax.set_axis_off()
+
+fig.canvas.manager.set_window_title("Lorenz Attractor")
+
+ax.xaxis.pane.set_facecolor('black')
+ax.yaxis.pane.set_facecolor('black')
+ax.zaxis.pane.set_facecolor('black')
 
 
 def lorenz(xyz, *, s=  10, r = 28,  b = 2.5):
-    x,y,z = xyz
-    x, y, z = xyz
+    x = xyz[0]
+    y = xyz[1]
+    z = xyz[2]
     x_dot = s*(y - x)
     y_dot = r*x - y - x*z
     z_dot = x*y - b*z
-    return np.array([x_dot, y_dot, z_dot])
+    return [x_dot, y_dot, z_dot]
 
-dt = 0.01
 num_steps = 1000
+dt = 0.01
 
-coordinates = np.empty((num_steps + 1, 3))
-coordinates[0] = (0, 1, 1.5)
+x, y, z = [],[], []
+
+x.append(0)
+y.append(1)
+z.append(1.5)
+
+line, = ax.plot(x, y, z, color = 'white')
 
 for i in range(num_steps):
-    coordinates[i+1] = coordinates[i] + lorenz(coordinates[i])*dt
+    temp = lorenz([x[i], y[i], z[i]])
 
-ax = plt.figure().add_subplot(projection='3d')
+    x.append(x[i] +temp[0]*dt)
+    y.append(y[i] +temp[1]*dt)
+    z.append(z[i] +temp[2]*dt)
+    
+    line.set_data(x, y)
+    line.set_3d_properties(z)
+    plt.draw()
+    plt.pause(0.01)
 
-ax.plot(*coordinates.T, lw=0.5)
-ax.set_xlabel("X Axis")
-ax.set_ylabel("Y Axis")
-ax.set_zlabel("Z Axis")
-ax.set_title("Lorenz Attractor")
-
+plt.ioff()
 plt.show()
