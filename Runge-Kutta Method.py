@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 
 #derivative we're fiding
 def fun(t,x):
-    return math.atan(x*t)
+    return math.sin(t)
 
-dt = 0.01
+dt = 0.001
 
 #initial conditions
 t = 0

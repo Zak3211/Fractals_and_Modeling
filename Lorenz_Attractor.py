@@ -33,14 +33,10 @@ def lorenz(xyz, *, s=  10, r = 28,  b = 2.5):
     z_dot = x*y - b*z
     return [x_dot, y_dot, z_dot]
 
-num_steps = 1000
+num_steps = 10000
 dt = 0.01
 
-x, y, z = [],[], []
-
-x.append(0)
-y.append(1)
-z.append(1.5)
+x, y, z = [0],[1],[1.5]
 
 line, = ax.plot(x, y, z, color = 'white')
 
@@ -54,7 +50,7 @@ for i in range(num_steps):
     line.set_data(x, y)
     line.set_3d_properties(z)
     plt.draw()
-    plt.pause(0.01)
+    plt.pause(0.001)
 
 plt.ioff()
 plt.show()
