@@ -10,8 +10,8 @@ L1 = 100
 L2 = 100
 
 #angles defining the system
-th1 = math.pi/2
-th2 = math.pi/2
+th1 = math.pi +0.01
+th2 = math.pi
 
 #w1 = th1'. w2 = th2'
 w1 = 0
@@ -89,7 +89,7 @@ def update(th1, th2, w1, w2, o1, o2):
     th1 += dt * w1
     th2 += dt * w2
 
-    #energies.append(energy(th1, th2, w1, w2))
+    energies.append(energy(th1, th2, w1, w2))
 
     x1 = screen_width/2 + L1*math.sin(th1)
     y1 = screen_height/2 + L1*math.cos(th1)
