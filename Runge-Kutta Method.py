@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 
 #derivative we're fiding
 def fun(t,x):
-    return math.sin(t)
+    return x*math.cos(t)**(-2)
 
-dt = 0.001
+dt = 0.0001
 
 #initial conditions
 t = 0
@@ -15,7 +15,7 @@ x = 1
 ts = [t]
 xs = [x]
 
-while t < 10:
+for i in range(100000):
     k1 = fun(t, x)
     k2 = fun(t+dt/2, x+dt*k1/2)
     k3 = fun(t+dt/2, x+dt*k2/2)

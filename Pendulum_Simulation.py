@@ -4,14 +4,14 @@ import matplotlib.pyplot as plt
 
 #constants
 g = 9.81
-m1 = 1
-m2 = 1
+m1 = 0.01
+m2 = 0.01
 L1 = 100
-L2 = 100
+L2 = 700
 
 #angles defining the system
-th1 = math.pi +0.01
-th2 = math.pi
+th1 = 2*math.pi/4 +0.01
+th2 = 2*math.pi/4
 
 #w1 = th1'. w2 = th2'
 w1 = 0
@@ -50,7 +50,7 @@ def energy(th1, th2, w1, w2):
 energies = []
 
 window = tk.Tk()
-canvas = tk.Canvas(window, bg = 'white', highlightthickness= 0)
+canvas = tk.Canvas(window, bg = 'black', highlightthickness= 0)
 
 screen_width = window.winfo_screenwidth()
 screen_height = window.winfo_screenheight()
@@ -62,21 +62,21 @@ canvas.pack()
 
 x1 = screen_width/2 + L1*math.sin(th1)
 y1 = screen_height/2 + L1*math.cos(th1)
-p1 = canvas.create_oval(x1 - 10, y1 - 10, x1 + 10, y1 + 10, fill='black')
+p1 = canvas.create_oval(x1 - 10, y1 - 10, x1 + 10, y1 + 10, fill='white')
 
-l1 = canvas.create_line(screen_width/2, screen_height/2, x1, y1, fill = 'black', width = 2)
+l1 = canvas.create_line(screen_width/2, screen_height/2, x1, y1, fill = 'white', width = 2)
 
 x2 =  x1 + L2*math.sin(th2)
 y2 = y1 + L2*math.cos(th2)
-p2 = canvas.create_oval(x2 - 10, y2 - 10, x2 + 10, y2 + 10,fill = 'black')
+p2 = canvas.create_oval(x2 - 10, y2 - 10, x2 + 10, y2 + 10,fill = 'white')
 
-l2 = canvas.create_line(x1, y1, x2, y2, fill = 'black', width = 2)
+l2 = canvas.create_line(x1, y1, x2, y2, fill = 'white', width = 2)
 
 #tracing logic
-trace = False
+trace = True
 if trace:
     trace_points = [x2, y2, x2, y2]
-    trace_line = canvas.create_line(trace_points, fill="blue", width=1, smooth=True)
+    trace_line = canvas.create_line(trace_points, fill="white", width=1, smooth=True)
 
 def update(th1, th2, w1, w2, o1, o2):
     #using simplectic method instead for updating variables
